@@ -1,0 +1,21 @@
+{
+   "name": "delmarapi",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "@types/sqlite3": "^3.1.5",
+      "nodemon": "^1.19.4",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "typeorm": "0.2.20",
+      "reflect-metadata": "^0.1.10",
+      "sqlite3": "^4.0.3"
+   },
+   "scripts": {
+      "start-server": "tsc && node ./build/index.js",
+      "start": "nodemon -w ./src -e ts --exec npm run start-server"
+   }
+}
