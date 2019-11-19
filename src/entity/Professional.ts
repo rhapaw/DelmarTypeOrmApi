@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Professional {
@@ -17,9 +17,10 @@ export class Professional {
     lastName: string;
 
     @Column({
-        length:260
+        length:260,
+        nullable: true
     })
-    photoUrl?: string;
+    photoUrl!: string;
 
 /*    @Column({
         length:15
@@ -55,6 +56,12 @@ export class Professional {
         length:600
     })
     blurb?: string; */
+
+    @CreateDateColumn()
+    createdAt?: Date;
+
+    @UpdateDateColumn()
+    updatedAt?: Date;
     
     /**
      *
@@ -62,7 +69,7 @@ export class Professional {
     constructor() {
         this.firstName = 'A';
         this.lastName = 'B';
-        this.photoUrl = 'C';
+        // this.photoUrl = 'C';
         
     }
 }
