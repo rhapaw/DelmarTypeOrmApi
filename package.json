@@ -15,7 +15,7 @@
       "sqlite3": "^4.0.3"
    },
    "scripts": {
-      "start-server": "tsc && node ./build/index.js",
+      "start-server": "tsc && node ./build/server.js",
       "start": "nodemon -w ./src -e ts --exec npm run start-server"
    }
 }
