@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
 @Entity()
 export class Property {
@@ -9,120 +9,130 @@ export class Property {
     @Column({
         length: 20
     })
-    propertyType: string;
+    propertyType!: string;
 
-/*     @Column({
-        length: 20
+     @Column({
+        length: 20,
+        nullable: true
     })
-    subType: string;
+    subType?: string;
 
     @Column({
         length: 20
     })
-    zoning: string;
+    zoning!: string;
+
+    @Column({
+        length: 20,
+        nullable: true
+    })
+    usage?: string;
+
+    @Column({
+        length: 1
+    })
+    buildingClass: string = 'A';
+
+    @Column({
+        length: 20,
+        nullable: true
+    })
+    saleType?: string;
 
     @Column({
         length: 20
     })
-    usage: string;
-
-    @Column({
-        length: 20
-    })
-    buildingClass: string;
-
-    @Column({
-        length: 20
-    })
-    saleType: string;
-
-    @Column({
-        length: 20
-    })
-    parcelId: string;
+    parcelNumber!: string;
 
     @Column()
-    salePrice: number;
+    salePrice: number = 0;
 
     @Column()
-    rentalPrice: number;
+    rentalPrice: number = 0;
 
     @Column()
-    sizeSf: number;
+    sizeSf: number = 0;
 
     @Column()
-    numberOfUnits: number;
+    numberOfUnits: number = 1;
 
     @Column()
-    numberOfFloors: number;
+    numberOfFloors: number = 1;
 
     @Column()
-    typicalFloorSizeSf: number;
+    typicalFloorSizeSf: number = 0;
 
     @Column()
-    yearBuilt: number;
+    yearBuilt!: number;
 
     @Column()
-    lotSize: number;
+    lotSize: number = 0;
 
     @Column({
         length: 6
     })
-    lotSizeUnits: string;
+    lotSizeUnits: string = 'sf';
 
     @Column()
-    parkingSpaces: number;
-
-    @Column()
-    parkingPer1000sf: number;
+    parkingSpaces: number = 0;
 
     @Column({
         length: 1000
     })
-    description: string;
+    description: string = 'describe property';
 
     @Column({
         length: 300
     })
-    highlights: string;
+    highlights: string = 'property highlights';
 
     @Column()
-    dockingHighDoors: number;
+    dockingHighDoors: number = 0;
 
     @Column()
-    buildingSpace: number;
+    buildingSpace: number = 0;
 
     @Column({
         length: 6
     })
-    buildingSpaceUnits: string;
+    buildingSpaceUnits: string = 'sf';
 
     @Column()
-    leaseOfficeSizeSf: number;
+    leaseOfficeSizeSf: number = 0;
 
     @Column()
-    leaseFloor: number;
+    leaseFloor: number = 1;
 
-    @Column()
-    leaseFrom: Date;
+    @Column(
+        {nullable: true}
+    )
+    leaseFrom?: Date;
 
-    @Column()
-    leaseTo: Date;
+    @Column(
+        {nullable: true}
+    )
+    leaseTo?: Date;
 
     @Column({
-        length: 260
+        length: 260,
+        nullable: true
     })
-    pictureUrl: string;
+    pictureUrl?: string;
 
     @Column({
-        length: 260
+        length: 260,
+        nullable: true
     })
-    brochureUrl: string; */    
+    brochureUrl?: string;  
 
-    /**
-     *
-     */
-    constructor() {
-        this.propertyType = 'A';
-    }
+    @CreateDateColumn()
+    createdAt?: Date;
+
+    @UpdateDateColumn()
+    updatedAt?: Date;
+
+    @VersionColumn()
+    version?: number;
+    
+    constructor() {}
 }
