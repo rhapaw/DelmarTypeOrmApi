@@ -6,6 +6,9 @@ export class Property {
     @PrimaryGeneratedColumn()
     id?: number;
 
+    @Column()
+    isForSale: boolean = false;
+
     @Column({
         length: 20
     })

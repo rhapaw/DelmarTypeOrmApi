@@ -1,9 +1,10 @@
-import { Employee } from '../entity/Employee';
+import { Employee } from '../entity/employee';
 import { getManager } from 'typeorm';
-import { Property } from '../entity/Property';
+import { Property } from '../entity/property';
 
 export class Seed {
-    employees: Employee[] =
+    async seedEmployees(){
+        const employees: Employee[] =
         [
             {
                 lastName: 'Young',
@@ -245,50 +246,50 @@ export class Seed {
             }
         ];
     
-    properties: Property[] = [
-        {
-            propertyType: 'Commercial',
-            subType: 'Office',
-            zoning: 'Commercial',
-            //usage: ,
-            buildingClass: 'A',
-            saleType: 'Standard',
-            parcelNumber: '123456',
-            salePrice: 25000000,
-            rentalPrice: 0,
-            sizeSf: 15000,
-            numberOfUnits: 5,
-            numberOfFloors: 1,
-            typicalFloorSizeSf: 15000,
-            yearBuilt: 1999,
-            lotSize: 40000,
-            lotSizeUnits: 'sf',
-            parkingSpaces: 35,
-            description: 'describe property',
-            highlights: 'property highlights',
-            dockingHighDoors: 1,
-            buildingSpace: 0,
-            buildingSpaceUnits: 'sf',
-            leaseOfficeSizeSf: 0,
-            leaseFloor: 1
-            //leaseFrom: null,
-            //leaseTo: null,
-            //pictureUrl: null,
-            //brochureUrl: null
-        }
-    ]
-
-    async seedEmployees(){
         console.log('Seed employees!');
         const repoEmp = getManager().getRepository(Employee);
-        await repoEmp.save(this.employees);
+        await repoEmp.save(employees);
         console.log('Saved employees?');
     }
 
     async seedProperties(){
+        const properties: Property[] = [
+            {
+                isForSale: true,
+                propertyType: 'Commercial',
+                subType: 'Office',
+                zoning: 'Commercial',
+                //usage: ,
+                buildingClass: 'A',
+                saleType: 'Standard',
+                parcelNumber: '123456',
+                salePrice: 25000000,
+                rentalPrice: 0,
+                sizeSf: 15000,
+                numberOfUnits: 5,
+                numberOfFloors: 1,
+                typicalFloorSizeSf: 15000,
+                yearBuilt: 1999,
+                lotSize: 40000,
+                lotSizeUnits: 'sf',
+                parkingSpaces: 35,
+                description: 'describe property',
+                highlights: 'property highlights',
+                dockingHighDoors: 1,
+                buildingSpace: 0,
+                buildingSpaceUnits: 'sf',
+                leaseOfficeSizeSf: 0,
+                leaseFloor: 1
+                //leaseFrom: null,
+                //leaseTo: null,
+                //pictureUrl: null,
+                //brochureUrl: null
+            }
+        ];
+    
         console.log('Seed properties!');
         const repoProp = getManager().getRepository(Property);
-        await repoProp.save(this.properties);
+        await repoProp.save(properties);
         console.log('Saved properties?');
     }
 
