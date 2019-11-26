@@ -1,6 +1,7 @@
 import { Employee } from '../entity/employee';
 import { getManager } from 'typeorm';
 import { Property } from '../entity/property';
+import { ColorSet } from '../entity/colorset';
 
 export class Seed {
     async seedEmployees(){
@@ -306,6 +307,28 @@ export class Seed {
         const repoProp = getManager().getRepository(Property);
         await repoProp.save(properties);
         console.log('Saved properties?');
+    }
+
+    async seedColorSets(){
+        const colorSets: ColorSet[] = [
+            {
+                colorSetName: 'Unknown',
+                primaryColor: '000000',
+                primaryBg: '000000',
+                secondaryColor: '000000',
+                secondaryBg: '000000',
+                infoColor: '000000',
+                navbarColor: '000000',
+                navbarBg: '000000',
+                navbarColorActive: '000000',
+                description: 'none'
+            }
+        ];
+    
+        console.log('Seed color sets!');
+        const repoColor = getManager().getRepository(ColorSet);
+        await repoColor.save(colorSets);
+        console.log('Saved color sets?');
     }
 
 }
