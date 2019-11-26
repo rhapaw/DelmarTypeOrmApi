@@ -1,8 +1,28 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
+class EmployeeBase {
+    id?: number;
+    firstName: string = '';
+    lastName: string = '';
+    photoUrl?: string;
+    phoneOffice?: string;
+    phoneMobile?: string;
+    email?: string;
+    department: string = 'Commercial';
+    position: string = 'Broker';
+    specialization: string = 'Commercial/Industrial';
+    blurb?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    version?: number;
+
+    constructor() {}
+}
+
+
 
 @Entity('Employees')
-export class Employee {
+export class Employee extends EmployeeBase{
 
     @PrimaryGeneratedColumn()
     id?: number;
@@ -72,9 +92,7 @@ export class Employee {
     version?: number;
     
     constructor() {
-//        this.firstName = 'A';
-        //this.lastName = 'B';
-        
+        super();
     }
 }
 

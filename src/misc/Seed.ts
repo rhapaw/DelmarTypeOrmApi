@@ -255,16 +255,22 @@ export class Seed {
     async seedProperties(){
         const properties: Property[] = [
             {
-                isForSale: true,
+                // For all properties (sale or lease)
+                saleOrLease: 'sale',  //sale, lease, both
+                propertyName: 'SD\'s Car Salvage',
+                addressLine1: '5180 Caldera Ct',
+                addressCity: 'Riverside',
+                addressState: 'CA',
+                addressZip: '92507',
+                validLatLong: false,
+                latitude: 0,
+                longitude: 0,
                 propertyType: 'Commercial',
                 subType: 'Office',
                 zoning: 'Commercial',
                 //usage: ,
-                buildingClass: 'A',
-                saleType: 'Standard',
+                buildingClass: 'A',   //A, B, C
                 parcelNumber: '123456',
-                salePrice: 25000000,
-                rentalPrice: 0,
                 sizeSf: 15000,
                 numberOfUnits: 5,
                 numberOfFloors: 1,
@@ -278,12 +284,21 @@ export class Seed {
                 dockingHighDoors: 1,
                 buildingSpace: 0,
                 buildingSpaceUnits: 'sf',
+                //primaryPhotoUrl: null,
+                //brochureUrl: null
+
+                // For properties that are for sale
+                saleType: 'Standard',
+                salePrice: 25000000,
+
+                // For properties that are for lease
+                leasePrice: 0,
+                leasePriceTerm: 'month',
                 leaseOfficeSizeSf: 0,
                 leaseFloor: 1
                 //leaseFrom: null,
                 //leaseTo: null,
-                //pictureUrl: null,
-                //brochureUrl: null
+
             }
         ];
     
