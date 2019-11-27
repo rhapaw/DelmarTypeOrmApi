@@ -17,28 +17,28 @@ export class PropertyController {
     }
 
     async getProperty(req: Request, resp: Response , next: NextFunction ) {
-        const repoProp = getManager().getRepository(Property);
-        const propId: any = parseInt(req.params.id);
-        console.log('propid: ', propId);
-        const prop: Property[] = await repoProp.findByIds([propId], {take: 1});
-        const propstr: string = JSON.stringify(prop);
-        resp.send(propstr);
-        console.log('found prop: ', prop);
+        const repo = getManager().getRepository(Property);
+        const id: any = parseInt(req.params.id);
+        console.log('property id: ', id);
+        const rec: Property[] = await repo.findByIds([id], {take: 1});
+        const json: string = JSON.stringify(rec);
+        resp.send(json);
+        console.log('found property: ', rec);
     }
 
     async getAllProperties(req: Request, resp: Response , next: NextFunction) {
-        const repoProp = getManager().getRepository(Property);
-        const props: Property[] = await repoProp.find();
-        const propstr: string = JSON.stringify(props);
-        resp.status(200).send(propstr);
-        console.log('found props: ', props);
+        const repo = getManager().getRepository(Property);
+        const rec: Property[] = await repo.find();
+        const json: string = JSON.stringify(rec);
+        resp.status(200).send(json);
+        console.log('found properties: ', rec);
     }
 
     async createProperty(req: Request, resp: Response , next: NextFunction) {
-        const repoProp = getManager().getRepository(Property);
-        const prop: Property = req.body;
-        await repoProp.save(prop);
-        console.log("created Property: ", prop);
+        const repo = getManager().getRepository(Property);
+        const rec: Property = req.body;
+        await repo.save(rec);
+        console.log("created Property: ", rec);
     }
 
     async updateProperty(req: Request, resp: Response , next: NextFunction) {
@@ -48,9 +48,6 @@ export class PropertyController {
     async deleteProperty(req: Request, resp: Response , next: NextFunction) {
 
     }
-
-
-
 
 }
 
