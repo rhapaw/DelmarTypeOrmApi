@@ -7,6 +7,8 @@ class ColorSetBase {
     secondaryColor: string = '000000';
     secondaryBg: string = '000000';
     infoColor: string = '000000';
+    brandColor: string = 'FFFFFF';
+    brandBg: string = 'FFFFFF';
     navbarColor: string = '000000';
     navbarBg: string = '000000';
     navbarColorActive: string = '000000';
@@ -52,6 +54,16 @@ export class ColorSet extends ColorSetBase{
         length: 6
     })
     infoColor: string = '000000';
+
+    @Column({
+        length: 6
+    })
+    brandColor: string = 'FFFFFF';
+
+    @Column({
+        length: 6
+    })
+    brandBg: string = 'FFFFFF';
 
     @Column({
         length: 6

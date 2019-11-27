@@ -318,6 +318,8 @@ export class Seed {
                 secondaryColor: '000000',
                 secondaryBg: '000000',
                 infoColor: '000000',
+                brandColor: 'FFFFFF',
+                brandBg: 'FFFFFF',
                 navbarColor: '000000',
                 navbarBg: '000000',
                 navbarColorActive: '000000',
