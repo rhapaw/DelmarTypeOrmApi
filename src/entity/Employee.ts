@@ -21,7 +21,7 @@ class EmployeeBase {
 
 
 
-@Entity('Employees')
+@Entity('employees')
 export class Employee extends EmployeeBase{
 
     @PrimaryGeneratedColumn()

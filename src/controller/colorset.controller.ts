@@ -1,52 +1,62 @@
-import { ColorSet } from '../entity/colorset';
+import { Colorset } from '../entity/colorset';
 import { getManager } from 'typeorm';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import createServer from 'connect';
 import { Z_STREAM_END } from 'zlib';
 //import { QueryExpressionMap } from 'typeorm/query-builder/QueryExpressionMap';
 
-export class ColorSetController {
+export class ColorsetController {
 
     constructor(basePath: string, app: Application, jsonParser: createServer.NextHandleFunction, 
         urlEncodedParser: createServer.NextHandleFunction) {
         // Register routers
-        app.get(basePath + '/colorset/:id', this.getColorSet);
-        app.get(basePath + '/colorset', this.getAllColorSets);
-        app.post(basePath + '/colorset', jsonParser, this.createColorSet);
+        app.get(basePath + '/colorset/:id', this.getColorset);
+        app.get(basePath + '/colorset', this.getColorsets);
+        app.post(basePath + '/colorset', jsonParser, this.createColorset);
         
     }
 
-    async getColorSet(req: Request, resp: Response , next: NextFunction ) {
-        const repo = getManager().getRepository(ColorSet);
-        const id: any = parseInt(req.params.id);
-        console.log('ColorSet id: ', id);
-        const rec: ColorSet[] = await repo.findByIds([id], {take: 1});
+    async getColorset(req: Request, resp: Response , next: NextFunction ) {
+        const repo = getManager().getRepository(Colorset);
+        const id: any = req.params.id;
+        console.log('Colorset name: ', id);
+        const rec: Colorset[] = await repo.findByIds([id], {take: 1});
         const json: string = JSON.stringify(rec);
         resp.send(json);
-        console.log('found ColorSet: ', rec);
+        console.log('found Colorset: ', rec);
     }
 
-    async getAllColorSets(req: Request, resp: Response , next: NextFunction) {
-        const repo = getManager().getRepository(ColorSet);
-        const rec: ColorSet[] = await repo.find();
+    async getColorsets(req: Request, resp: Response , next: NextFunction) {
+        const repo = getManager().getRepository(Colorset);
+        const rec: Colorset[] = await repo.find();
         const json: string = JSON.stringify(rec);
         resp.status(200).send(json);
-        console.log('found ColorSets: ', rec);
+        console.log('found Colorsets: ', rec);
     }
 
-    async createColorSet(req: Request, resp: Response , next: NextFunction) {
-        const repo = getManager().getRepository(ColorSet);
-        const rec: ColorSet = req.body;
+    async createColorset(req: Request, resp: Response , next: NextFunction) {
+        const repo = getManager().getRepository(Colorset);
+        const rec: Colorset = req.body;
         await repo.save(rec);
-        console.log("created ColorSet: ", rec);
+        console.log("created Colorset: ", rec);
     }
 
-    async updateColorSet(req: Request, resp: Response , next: NextFunction) {
-
+    async updateColorset(req: Request, resp: Response , next: NextFunction) {
+        const repo = getManager().getRepository(Colorset);
+        const id: any = req.params.id;
+        console.log('update colorset name: ', id);
+        await repo.update(id, req.body);
+        resp.status(200).send();
+        console.log('updated Colorset: ', id);
     }
 
-    async deleteColorSet(req: Request, resp: Response , next: NextFunction) {
-
+    async deleteColorset(req: Request, resp: Response , next: NextFunction) {
+        const repo = getManager().getRepository(Colorset);
+        const id: any = req.params.id;
+        console.log('delete colorset name: ', id);
+        await repo.delete(id);
+        resp.status(200).send();
+        console.log('deleted Colorset: ', id);
     }
 
 }

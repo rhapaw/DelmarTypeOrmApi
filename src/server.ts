@@ -2,14 +2,14 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Employee} from "./entity/employee";
 import { Property } from './entity/property';
-import { ColorSet } from './entity/colorset';
+import { Colorset } from './entity/colorset';
 import { Seed } from './misc/Seed';
 import bodyparser from 'body-parser';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import createServer from 'connect';
 import { EmployeeController } from './controller/employee.controller';
 import { PropertyController } from './controller/property.controller';
-import { ColorSetController } from './controller/colorset.controller';
+import { ColorsetController } from './controller/colorset.controller';
 
 const app: Application = express();
 const jsonParser: createServer.NextHandleFunction = bodyparser.json();
@@ -23,7 +23,7 @@ createConnection().then(async connection => {
 
     const empCount = await connection.manager.count(Employee);
     const propCount = await connection.manager.count(Property);
-    const colCount = await connection.manager.count(ColorSet);
+    const colCount = await connection.manager.count(Colorset);
     console.log(`There are ${empCount} employeees, ${propCount} properties and ${colCount} colorsets.`);
     if (empCount === 0 || propCount === 0 || colCount === 0) {
         const seed = new Seed();
@@ -34,7 +34,7 @@ createConnection().then(async connection => {
             await seed.seedProperties();
         }
         if (colCount === 0) {
-            await seed.seedColorSets();
+            await seed.seedColorsets();
         }
 
 /*         const emps = await connection.manager.find(Employee);
@@ -47,7 +47,7 @@ createConnection().then(async connection => {
 
     new EmployeeController(basePath, app, jsonParser, urlEncodedParser);
     new PropertyController(basePath, app, jsonParser, urlEncodedParser);
-    new ColorSetController(basePath, app, jsonParser, urlEncodedParser);
+    new ColorsetController(basePath, app, jsonParser, urlEncodedParser);
 
     app.listen(5000, () => {console.log('server listening on 5000')});
     console.log("Here you can setup and run express/koa/any other framework.");

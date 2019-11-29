@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
-class ColorSetBase {
+class ColorsetBase {
     colorSetName: string = 'Unknown';
     primaryColor: string = '000000';
     primaryBg: string = '000000';
@@ -22,8 +22,8 @@ class ColorSetBase {
 
 
 
-@Entity('ColorSets')
-export class ColorSet extends ColorSetBase{
+@Entity('colorsets')
+export class Colorset extends ColorsetBase{
 
     @PrimaryColumn({
         length: 24

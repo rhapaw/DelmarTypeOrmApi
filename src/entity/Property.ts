@@ -1,7 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
 export class PropertyBase {
-    // For all properties (sale or lease)    id?: number;
+    // For all properties (sale or lease)
+    id?: number;
     saleOrLease: string = 'lease';
     propertyName!: string;
     addressLine1!: string;
@@ -53,7 +54,7 @@ export class PropertyBase {
     constructor() {}
 }
 
-@Entity('Properties')
+@Entity('properties')
 export class Property extends PropertyBase {
 
     @PrimaryGeneratedColumn()
