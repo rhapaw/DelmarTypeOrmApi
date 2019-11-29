@@ -22,7 +22,7 @@ export class PropertyController {
         console.log('property id: ', id);
         const rec: Property[] = await repo.findByIds([id], {take: 1});
         const json: string = JSON.stringify(rec);
-        resp.send(json);
+        resp.status(200).contentType('application/json').send(json);
         console.log('found property: ', rec);
     }
 
@@ -30,7 +30,7 @@ export class PropertyController {
         const repo = getManager().getRepository(Property);
         const rec: Property[] = await repo.find();
         const json: string = JSON.stringify(rec);
-        resp.status(200).send(json);
+        resp.status(200).contentType('application/json').send(json);
         console.log('found properties: ', rec);
     }
 

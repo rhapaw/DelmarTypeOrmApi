@@ -11,7 +11,7 @@ export class EmployeeController {
         urlEncodedParser: createServer.NextHandleFunction) {
         // Register routers
         app.get(basePath + '/employee/:id', this.getEmployee);
-        app.get(basePath + '/employee', this.getAllEmployees);
+        app.get(basePath + '/employee', this.getEmployees);
         app.post(basePath + '/employee', jsonParser, this.createEmployee);
 
     }
@@ -22,15 +22,15 @@ export class EmployeeController {
         console.log('Employee id: ', id);
         const rec: Employee[] = await repo.findByIds([id], { take: 1 });
         const json: string = JSON.stringify(rec);
-        resp.send(json);
+        resp.status(200).contentType('application/json').send(json);
         console.log('found Employee: ', rec);
     }
 
-    async getAllEmployees(req: Request, resp: Response, next: NextFunction) {
+    async getEmployees(req: Request, resp: Response, next: NextFunction) {
         const repo = getManager().getRepository(Employee);
         const rec: Employee[] = await repo.find();
         const json: string = JSON.stringify(rec);
-        resp.status(200).send(json);
+        resp.status(200).contentType('application/json').send(json);
         console.log('found Employees: ', rec);
     }
 

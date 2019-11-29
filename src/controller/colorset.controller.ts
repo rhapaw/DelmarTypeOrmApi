@@ -22,7 +22,7 @@ export class ColorsetController {
         console.log('Colorset name: ', id);
         const rec: Colorset[] = await repo.findByIds([id], {take: 1});
         const json: string = JSON.stringify(rec);
-        resp.send(json);
+        resp.status(200).contentType('application/json').send(json);
         console.log('found Colorset: ', rec);
     }
 
@@ -30,7 +30,7 @@ export class ColorsetController {
         const repo = getManager().getRepository(Colorset);
         const rec: Colorset[] = await repo.find();
         const json: string = JSON.stringify(rec);
-        resp.status(200).send(json);
+        resp.status(200).contentType('application/json').send(json);
         console.log('found Colorsets: ', rec);
     }
 
