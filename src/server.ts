@@ -6,6 +6,7 @@ import { Colorset } from './entity/colorset';
 import { Seed } from './misc/Seed';
 import bodyparser from 'body-parser';
 import express, { Application, Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import createServer from 'connect';
 import { EmployeeController } from './controller/employee.controller';
 import { PropertyController } from './controller/property.controller';
@@ -44,6 +45,9 @@ createConnection().then(async connection => {
         console.log("All properties: ", props); */
 
     }
+
+    app.use(cors());
+    app.options('*', cors());
 
     new EmployeeController(basePath, app, jsonParser, urlEncodedParser);
     new PropertyController(basePath, app, jsonParser, urlEncodedParser);
