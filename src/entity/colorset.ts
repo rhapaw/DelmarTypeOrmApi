@@ -31,52 +31,52 @@ export class Colorset extends ColorsetBase{
     colorSetName: string = 'Unknown';
 
     @Column({
-        length: 6
+        length: 16
     })
     primaryColor: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     primaryBg: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     secondaryColor: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     secondaryBg: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     infoColor: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     brandColor: string = 'FFFFFF';
 
     @Column({
-        length: 6
+        length: 16
     })
     brandBg: string = 'FFFFFF';
 
     @Column({
-        length: 6
+        length: 16
     })
     navbarColor: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     navbarBg: string = '000000';
 
     @Column({
-        length: 6
+        length: 16
     })
     navbarColorActive: string = '000000';
 

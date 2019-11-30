@@ -352,18 +352,33 @@ export class Seed {
     async seedColorsets(){
         const colorsets: Colorset[] = [
             {
-                colorSetName: 'Unknown',
-                primaryColor: '000000',
-                primaryBg: '000000',
-                secondaryColor: '000000',
-                secondaryBg: '000000',
-                infoColor: '000000',
-                brandColor: 'FFFFFF',
-                brandBg: 'FFFFFF',
-                navbarColor: '000000',
-                navbarBg: '000000',
-                navbarColorActive: '000000',
-                description: 'none'
+                colorSetName: 'Original',
+                primaryColor: '#eeeee7',
+                primaryBg: '#0f3193',
+                secondaryColor: '#eeeee7',
+                secondaryBg: '#959595',
+                infoColor: '#09576e',
+                brandColor: 'blue',
+                brandBg: 'white',
+                navbarColor: 'white',
+                navbarBg: '#0f3193',
+                navbarColorActive: '#868181',
+                description: 'The original colors for the Delmar1.com website'
+            },
+            
+            {
+                colorSetName: 'Default',
+                primaryColor: '#eeeee7',
+                primaryBg: '#0f3193',
+                secondaryColor: '#eeeee7',
+                secondaryBg: '#959595',
+                infoColor: '#09576e',
+                brandColor: 'blue',
+                brandBg: 'white',
+                navbarColor: 'white',
+                navbarBg: '#0f3193',
+                navbarColorActive: '#868181',
+                description: 'The default colors for the Delmar1.com website'
             }
         ];
     
