@@ -11,9 +11,10 @@ export class PropertyController {
         urlEncodedParser: createServer.NextHandleFunction) {
         // Register routers
         app.get(basePath + '/property/:id', this.getProperty);
-        app.get(basePath + '/property', this.getAllProperties);
+        app.get(basePath + '/property', this.getProperties);
         app.post(basePath + '/property', jsonParser, this.createProperty);
-        
+        app.put(basePath + '/property/:id', jsonParser, this.updateProperty);
+        app.delete(basePath + '/property/:id', jsonParser, this.deleteProperty);
     }
 
     async getProperty(req: Request, resp: Response , next: NextFunction ) {
@@ -26,7 +27,7 @@ export class PropertyController {
         console.log('found property: ', rec);
     }
 
-    async getAllProperties(req: Request, resp: Response , next: NextFunction) {
+    async getProperties(req: Request, resp: Response , next: NextFunction) {
         const repo = getManager().getRepository(Property);
         const rec: Property[] = await repo.find();
         const json: string = JSON.stringify(rec);
@@ -38,15 +39,26 @@ export class PropertyController {
         const repo = getManager().getRepository(Property);
         const rec: Property = req.body;
         await repo.save(rec);
+        resp.status(200).send();
         console.log("created Property: ", rec);
     }
 
     async updateProperty(req: Request, resp: Response , next: NextFunction) {
-
+        const repo = getManager().getRepository(Property);
+        const id: any = parseInt(req.params.id);
+        console.log('update property id: ', id);
+        await repo.update(id, req.body);
+        resp.status(200).send();
+        console.log('updated property: ', id);
     }
 
     async deleteProperty(req: Request, resp: Response , next: NextFunction) {
-
+        const repo = getManager().getRepository(Property);
+        const id: any = parseInt(req.params.id);
+        console.log('delete property id: ', id);
+        await repo.delete(id);
+        resp.status(200).send();
+        console.log('deleted property: ', id);
     }
 
 }

@@ -1,13 +1,20 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
+import { ByteRange } from 'express-serve-static-core';
 
 class EmployeeBase {
     id?: number;
+    isContact: boolean = true;
+    isUser: boolean = true;
     firstName: string = '';
     lastName: string = '';
     photoUrl?: string;
     phoneOffice?: string;
     phoneMobile?: string;
     email?: string;
+    userEmail?: string;
+    passwordHash?: string;
+    passwordSalt?: string;
+    contactGroupSeq: number = 0;
     department: string = 'Commercial';
     position: string = 'Broker';
     specialization: string = 'Commercial/Industrial';
@@ -26,6 +33,12 @@ export class Employee extends EmployeeBase{
 
     @PrimaryGeneratedColumn()
     id?: number;
+
+    @Column()
+    isContact: boolean = true;
+
+    @Column()
+    isUser: boolean = true;
 
     @Column({
         length:30
@@ -60,6 +73,27 @@ export class Employee extends EmployeeBase{
         nullable: true
     })
     email?: string;
+
+    @Column({
+        length:150,
+        nullable: true
+    })
+    userEmail?: string;
+
+    @Column({
+        length:260,
+        nullable: true
+    })
+    passwordHash?: string;
+
+    @Column({
+        length:260,
+        nullable: true
+    })
+    passwordSalt?: string;
+
+    @Column()
+    contactGroupSeq: number = 0;
 
     @Column({
         length:15

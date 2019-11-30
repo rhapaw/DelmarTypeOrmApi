@@ -13,7 +13,8 @@ export class ColorsetController {
         app.get(basePath + '/colorset/:id', this.getColorset);
         app.get(basePath + '/colorset', this.getColorsets);
         app.post(basePath + '/colorset', jsonParser, this.createColorset);
-        
+        app.put(basePath + '/colorset/:id', jsonParser, this.updateColorset);
+        app.delete(basePath + '/colorset/:id', this.deleteColorset);
     }
 
     async getColorset(req: Request, resp: Response , next: NextFunction ) {
@@ -39,6 +40,7 @@ export class ColorsetController {
         const rec: Colorset = req.body;
         await repo.save(rec);
         console.log("created Colorset: ", rec);
+        resp.status(200).send();
     }
 
     async updateColorset(req: Request, resp: Response , next: NextFunction) {
