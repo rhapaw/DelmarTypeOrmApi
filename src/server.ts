@@ -47,7 +47,7 @@ createConnection().then(async connection => {
     }
 
     app.use(cors());
-    app.options('*', cors());
+    // app.options('localhost', cors());
 
     new EmployeeController(basePath, app, jsonParser, urlEncodedParser);
     new PropertyController(basePath, app, jsonParser, urlEncodedParser);
