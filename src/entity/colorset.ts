@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn, VersionColumn, BaseEntity } from "typeorm";
 
 class ColorsetBase {
-    colorSetName: string = 'Unknown';
+    colorsetName: string = 'Unknown';
+    isDefault: boolean = false;
     primaryColor: string = '000000';
     primaryBg: string = '000000';
     secondaryColor: string = '000000';
@@ -17,18 +18,23 @@ class ColorsetBase {
     updatedAt?: Date;
     version?: number;
 
-    constructor() {}
+    constructor() {
+        // super();
+    }
 }
 
 
 
 @Entity('colorsets')
-export class Colorset extends ColorsetBase{
+export class Colorset extends ColorsetBase {
 
     @PrimaryColumn({
         length: 24
     })
-    colorSetName: string = 'Unknown';
+    colorsetName: string = 'Unknown';
+
+    @Column()
+    isDefault: boolean = false;
 
     @Column({
         length: 16

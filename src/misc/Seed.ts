@@ -352,7 +352,8 @@ export class Seed {
     async seedColorsets(){
         const colorsets: Colorset[] = [
             {
-                colorSetName: 'Original',
+                colorsetName: 'ORIGINAL',
+                isDefault: false,
                 primaryColor: '#eeeee7',
                 primaryBg: '#0f3193',
                 secondaryColor: '#eeeee7',
@@ -367,7 +368,8 @@ export class Seed {
             },
             
             {
-                colorSetName: 'Default',
+                colorsetName: 'DEFAULT',
+                isDefault: true,
                 primaryColor: '#eeeee7',
                 primaryBg: '#0f3193',
                 secondaryColor: '#eeeee7',

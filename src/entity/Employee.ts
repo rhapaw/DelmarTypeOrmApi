@@ -23,13 +23,13 @@ class EmployeeBase {
     updatedAt?: Date;
     version?: number;
 
-    constructor() {}
+    // constructor() {}
 }
 
 
 
 @Entity('employees')
-export class Employee extends EmployeeBase{
+export class Employee extends EmployeeBase {
 
     @PrimaryGeneratedColumn()
     id?: number;

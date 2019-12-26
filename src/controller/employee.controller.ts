@@ -63,6 +63,20 @@ export class EmployeeController {
     }
 
     async getContacts(req: Request, resp: Response, next: NextFunction) {
+        var pageNumber: number = 1;
+        var pageSize: number = 20;
+        var skip: number;
+
+        console.log('Params: ', req.params);
+
+        if (req.params.pageNumber != null) {
+            pageNumber = parseInt(req.params.pageNumber);
+        }
+        if (req.params.pageSize != null) {
+            pageSize = parseInt(req.params.pageSize);
+        }
+        skip = pageSize * (pageNumber - 1);
+        console.log(`pageNumber: ${pageNumber}, pageSize: ${pageSize}, skip: ${skip}`);
         const repo = getManager().getRepository(Employee);
         console.log('Looking for contacts');
         const rec: Employee[] = await repo.createQueryBuilder("employee")
@@ -70,6 +84,8 @@ export class EmployeeController {
         .orderBy('contactGroupSeq', 'ASC')
         .addOrderBy('lastName', 'ASC')
         .addOrderBy('firstName', 'ASC')
+        .skip(skip)
+        .take(pageSize)
         .getMany();
         const json: string = JSON.stringify(rec);
         resp.status(200).contentType('application/json').send(json);
