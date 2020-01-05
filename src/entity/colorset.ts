@@ -1,25 +1,40 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn, VersionColumn, BaseEntity } from "typeorm";
 
 class ColorsetBase {
-    colorsetName: string = 'Unknown';
-    isDefault: boolean = false;
-    primaryColor: string = '000000';
-    primaryBg: string = '000000';
-    secondaryColor: string = '000000';
-    secondaryBg: string = '000000';
-    infoColor: string = '000000';
-    brandColor: string = 'FFFFFF';
-    brandBg: string = 'FFFFFF';
-    navbarColor: string = '000000';
-    navbarBg: string = '000000';
-    navbarColorActive: string = '000000';
-    description: string = 'none';
+    id?: number;
+    colorsetName: string;
+    isDefault: boolean;
+    isProtected: boolean;
+    primaryColor: string;
+    primaryBg: string;
+    secondaryColor: string;
+    secondaryBg: string;
+    infoColor: string;
+    infoBg: string;
+    brandColor: string;
+    brandBg: string;
+    navbarColor: string;
+    navbarBg: string;
+    navbarColorActive: string;
     createdAt?: Date;
     updatedAt?: Date;
     version?: number;
 
     constructor() {
-        // super();
+        this.colorsetName = 'Unknown';
+        this.isDefault = false;
+        this.isProtected = false;
+        this.primaryColor = '000000';
+        this.primaryBg = '000000';
+        this.secondaryColor = '000000';
+        this.secondaryBg = '000000';
+        this.infoColor = '000000';
+        this.infoBg = '000000';
+        this.brandColor = 'FFFFFF';
+        this.brandBg = 'FFFFFF';
+        this.navbarColor = '000000';
+        this.navbarBg = '000000';
+        this.navbarColorActive = '000000';
     }
 }
 
@@ -28,13 +43,19 @@ class ColorsetBase {
 @Entity('colorsets')
 export class Colorset extends ColorsetBase {
 
-    @PrimaryColumn({
-        length: 24
+    @PrimaryColumn()
+    id?: number;
+
+    @Column({
+        length: 40
     })
     colorsetName: string = 'Unknown';
 
     @Column()
     isDefault: boolean = false;
+
+    @Column()
+    isProtected: boolean = false;
 
     @Column({
         length: 16
@@ -64,6 +85,11 @@ export class Colorset extends ColorsetBase {
     @Column({
         length: 16
     })
+    infoBg: string = '000000';
+
+    @Column({
+        length: 16
+    })
     brandColor: string = 'FFFFFF';
 
     @Column({
@@ -85,11 +111,6 @@ export class Colorset extends ColorsetBase {
         length: 16
     })
     navbarColorActive: string = '000000';
-
-    @Column({
-        length: 100
-    })
-    description: string = 'none';
 
     @CreateDateColumn()
     createdAt?: Date;

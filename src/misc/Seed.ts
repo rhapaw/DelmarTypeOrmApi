@@ -352,35 +352,39 @@ export class Seed {
     async seedColorsets(){
         const colorsets: Colorset[] = [
             {
-                colorsetName: 'ORIGINAL',
+                id: undefined,
+                colorsetName: 'Original',
                 isDefault: false,
+                isProtected: true,
                 primaryColor: '#eeeee7',
                 primaryBg: '#0f3193',
                 secondaryColor: '#eeeee7',
                 secondaryBg: '#959595',
                 infoColor: '#09576e',
+                infoBg: 'white',
                 brandColor: 'blue',
                 brandBg: 'white',
                 navbarColor: 'white',
                 navbarBg: '#0f3193',
-                navbarColorActive: '#868181',
-                description: 'The original colors for the Delmar1.com website'
+                navbarColorActive: '#868181'
             },
             
             {
-                colorsetName: 'DEFAULT',
+                id: undefined,
+                colorsetName: 'Default',
                 isDefault: true,
+                isProtected: false,
                 primaryColor: '#eeeee7',
                 primaryBg: '#0f3193',
                 secondaryColor: '#eeeee7',
                 secondaryBg: '#959595',
                 infoColor: '#09576e',
+                infoBg: 'white',
                 brandColor: 'blue',
                 brandBg: 'white',
                 navbarColor: 'white',
                 navbarBg: '#0f3193',
-                navbarColorActive: '#868181',
-                description: 'The default colors for the Delmar1.com website'
+                navbarColorActive: '#868181'
             }
         ];
     
