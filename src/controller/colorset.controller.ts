@@ -21,7 +21,6 @@ export class ColorsetController {
 
     async getDefaultColorset(req: Request, resp: Response , next: NextFunction ) {
         console.log('Get default Colorset');
-        // const rec: Colorset[] = await Colorset.find({isDefault: true});
         const conn = getConnection();
         const rec: Colorset[] = await conn.createQueryBuilder()
             .select('cs')
@@ -35,19 +34,19 @@ export class ColorsetController {
     }
 
     async setDefaultColorset(req: Request, resp: Response , next: NextFunction ) {
-        const id: any = req.params.id.toUpperCase();
+        const id: any = parseInt(req.params.id);
         console.log('Set Colorset: ' + id + ' as default');
         const conn = getConnection();
         await conn.createQueryBuilder()
             .update(Colorset)
             .set({isDefault: true})
-            .where('colorsetName = :id', {id: id})
+            .where('id = :id', {id: id})
             .execute();
 
         await conn.createQueryBuilder()
             .update(Colorset)
             .set({isDefault: false})
-            .where('colorsetName != :id', {id: id})
+            .where('id != :id', {id: id})
             .execute();
 
         resp.status(200).contentType('application/json').send();
@@ -55,13 +54,18 @@ export class ColorsetController {
     }
 
     async getColorset(req: Request, resp: Response , next: NextFunction ) {
-        const repo = getManager().getRepository(Colorset);
-        const id: any = req.params.id.toUpperCase();
-        console.log('Colorset name: ', id);
-        const rec: Colorset[] = await repo.findByIds([id], {take: 1});
+        const id: any = parseInt(req.params.id);
+        console.log('Get Colorset id: ', id);
+        const conn = getConnection();
+        const rec: Colorset[] = await conn.createQueryBuilder()
+            .select('cs')
+            .from(Colorset, 'cs')
+            .where('id = :id)', {id: id})
+            .getMany();
+
         const json: string = JSON.stringify(rec);
         resp.status(200).contentType('application/json').send(json);
-        console.log('found Colorset: ', rec);
+        console.log('found Colorsets: ', rec);
     }
 
     async getColorsets(req: Request, resp: Response , next: NextFunction) {
@@ -77,19 +81,17 @@ export class ColorsetController {
     async createColorset(req: Request, resp: Response , next: NextFunction) {
         const repo = getManager().getRepository(Colorset);
         const rec: Colorset = req.body;
-        rec.colorsetName = rec.colorsetName.toUpperCase();
         rec.isDefault = false;
         await repo.save(rec);
         console.log("created Colorset: ", rec);
-        resp.status(200).send();
+        resp.status(201).send();
     }
 
     async updateColorset(req: Request, resp: Response , next: NextFunction) {
         const repo = getManager().getRepository(Colorset);
-        const id: any = req.params.id.toUpperCase();
-        console.log('update colorset name: ', id);
+        const id: any = parseInt(req.params.id);
+        console.log('update colorset id: ', id);
         const rec: Colorset = req.body;
-        rec.colorsetName = rec.colorsetName.toUpperCase();
         rec.isDefault = false;
         await repo.update(id, rec);
         resp.status(200).send();
@@ -98,8 +100,8 @@ export class ColorsetController {
 
     async deleteColorset(req: Request, resp: Response , next: NextFunction) {
         const repo = getManager().getRepository(Colorset);
-        const id: any = req.params.id.toUpperCase();
-        console.log('delete colorset name: ', id);
+        const id: any = parseInt(req.params.id);
+        console.log('delete colorset id: ', id);
         await repo.delete(id);
         resp.status(200).send();
         console.log('deleted Colorset: ', id);

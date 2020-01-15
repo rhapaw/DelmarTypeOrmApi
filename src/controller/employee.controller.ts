@@ -41,7 +41,7 @@ export class EmployeeController {
         const rec: Employee = req.body;
         await repo.save(rec);
         console.log("created Employee: ", rec);
-        resp.status(200).send();
+        resp.status(201).send();
     }
 
     async updateEmployee(req: Request, resp: Response, next: NextFunction) {
