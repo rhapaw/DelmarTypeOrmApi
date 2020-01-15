@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
-export class PropertyBase {
-    // For all properties (sale or lease)
+export class ListingBase {
+    // For all Listings (sale or lease)
     id?: number;
     saleOrLease: string = 'lease';
-    propertyName!: string;
+    ListingName!: string;
     addressLine1!: string;
     addressCity!: string;
     addressState: string = 'CA';
@@ -12,7 +12,7 @@ export class PropertyBase {
     validLatLong: boolean = false;
     latitude: number = 0;
     longitude: number = 0;
-    propertyType!: string;
+    ListingType!: string;
     subType?: string;
     zoning!: string;
     usage?: string;
@@ -26,19 +26,19 @@ export class PropertyBase {
     lotSize: number = 0;
     lotSizeUnits: string = 'sf';
     parkingSpaces: number = 0;
-    description: string = 'describe property';
-    highlights: string = 'property highlights';
+    description: string = 'describe Listing';
+    highlights: string = 'Listing highlights';
     dockingHighDoors: number = 0;
     buildingSpace: number = 0;
     buildingSpaceUnits: string = 'sf';
     primaryPhotoUrl?: string;
     brochureUrl?: string;  
 
-    // For properties that are for sale
+    // For Listings that are for sale
     saleType?: string;
     salePrice: number = 0;
 
-    // For properties that are for lease
+    // For Listings that are for lease
     leasePrice: number = 0;
     leasePriceTerm: string = 'month';
     leaseOfficeSizeSf: number = 0;
@@ -54,13 +54,13 @@ export class PropertyBase {
     constructor() {}
 }
 
-@Entity('properties')
-export class Property extends PropertyBase {
+@Entity('Listings')
+export class Listing extends ListingBase {
 
     @PrimaryGeneratedColumn()
     id?: number;
 
-    // For all properties (sale or lease)    id?: number;
+    // For all Listings (sale or lease)    id?: number;
 
     @Column({
         length: 8
@@ -70,7 +70,7 @@ export class Property extends PropertyBase {
     @Column({
         length: 30
     })
-    propertyName!: string;
+    ListingName!: string;
 
     @Column({
         length: 40
@@ -104,7 +104,7 @@ export class Property extends PropertyBase {
     @Column({
         length: 20
     })
-    propertyType!: string;
+    ListingType!: string;
 
      @Column({
         length: 20,
@@ -162,12 +162,12 @@ export class Property extends PropertyBase {
     @Column({
         length: 1000
     })
-    description: string = 'describe property';
+    description: string = 'describe Listing';
 
     @Column({
         length: 300
     })
-    highlights: string = 'property highlights';
+    highlights: string = 'Listing highlights';
 
     @Column()
     dockingHighDoors: number = 0;
@@ -192,7 +192,7 @@ export class Property extends PropertyBase {
     })
     brochureUrl?: string;  
 
-    // For properties that are for sale
+    // For Listings that are for sale
 
     @Column({
         length: 20,
@@ -203,7 +203,7 @@ export class Property extends PropertyBase {
     @Column()
     salePrice: number = 0;
 
-    // For properties that are for lease
+    // For Listings that are for lease
 
     @Column()
     leasePrice: number = 0;

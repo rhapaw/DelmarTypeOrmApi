@@ -1,6 +1,6 @@
 import { Employee } from '../entity/employee';
 import { getManager } from 'typeorm';
-import { Property } from '../entity/property';
+import { Listing } from '../entity/Listing';
 import { Colorset } from '../entity/colorset';
 
 export class Seed {
@@ -30,7 +30,7 @@ export class Seed {
       </p>
       <p>
           During the past twenty years, Mr. Young has been named as a court-appointed receiver for over
-          one hundred properties throughout California.
+          one hundred Listings throughout California.
       </p>`
             },
 
@@ -50,16 +50,16 @@ export class Seed {
                 blurb: `
             <p>
             Jim Cordova is responsible for the overall management of the accounting department. His duties
-            include the preparation of the monthly property financial packages, annual budgets, annual audits
+            include the preparation of the monthly Listing financial packages, annual budgets, annual audits
             and CAM/Operating Expense reconciliations. The accounting department currently processes
-            payable and receivables for over ten properties, four companies and three foreign partnerships
+            payable and receivables for over ten Listings, four companies and three foreign partnerships
             including those of the company.
             </p>
             <p>
             Mr. Cordova also coordinates all long-term management and
-            financial planning for Delmar Property Management. Delmar Property Management is currently
+            financial planning for Delmar Listing Management. Delmar Listing Management is currently
             using Windows 7 & 8, Microsoft Excel, Microsoft Word, and Microsoft Access and uses Spectra
-            property management software.
+            Listing management software.
             </p>`
             },
 
@@ -78,7 +78,7 @@ export class Seed {
                 specialization: 'Office/Investment',
                 blurb: `
             <p>
-            Matt joined Delmar in 1995 as a property manager and graduated to the position of Controller in
+            Matt joined Delmar in 1995 as a Listing manager and graduated to the position of Controller in
             2002. Matt currently oversees Delmar’s investment division and is the head asset manager.
             </p>`
             },
@@ -88,18 +88,18 @@ export class Seed {
                 isUser: true,
                 lastName: 'Young',
                 firstName: 'Quinn',
-                department: 'Property Management',
+                department: 'Listing Management',
                 phoneOffice: '(909) 945-4594',
                 email: 'quinny@delmar1.com',
                 userEmail: 'quinny@delmar1.com',
                 contactGroupSeq: 5,
                 photoUrl: 'quinnyoung.jpg',
-                position: 'Property Manager',
-                specialization: 'Property Manager',
+                position: 'Listing Manager',
+                specialization: 'Listing Manager',
                 blurb: `
             <p>
-            Quinn Young is responsible for all physical aspects of the properties. He is familiar with commercial
-            leases and the implementation of the lease. He regularly visits and inspects the properties and deals
+            Quinn Young is responsible for all physical aspects of the Listings. He is familiar with commercial
+            leases and the implementation of the lease. He regularly visits and inspects the Listings and deals
             with various building and tenant issues. He supervises all recurring maintenance work. He assists in
             the budgeting process and then works to schedule and implement the work in a timely and
             professional manner.
@@ -293,12 +293,12 @@ export class Seed {
         console.log('Saved employees?');
     }
 
-    async seedProperties(){
-        const properties: Property[] = [
+    async seedListings(){
+        const Listings: Listing[] = [
             {
-                // For all properties (sale or lease)
+                // For all Listings (sale or lease)
                 saleOrLease: 'sale',  //sale, lease, both
-                propertyName: 'SD\'s Car Salvage',
+                ListingName: 'SD\'s Car Salvage',
                 addressLine1: '5180 Caldera Ct',
                 addressCity: 'Riverside',
                 addressState: 'CA',
@@ -306,7 +306,7 @@ export class Seed {
                 validLatLong: false,
                 latitude: 0,
                 longitude: 0,
-                propertyType: 'Commercial',
+                ListingType: 'Commercial',
                 subType: 'Office',
                 zoning: 'Commercial',
                 //usage: ,
@@ -320,19 +320,19 @@ export class Seed {
                 lotSize: 40000,
                 lotSizeUnits: 'sf',
                 parkingSpaces: 35,
-                description: 'describe property',
-                highlights: 'property highlights',
+                description: 'describe Listing',
+                highlights: 'Listing highlights',
                 dockingHighDoors: 1,
                 buildingSpace: 0,
                 buildingSpaceUnits: 'sf',
                 //primaryPhotoUrl: null,
                 //brochureUrl: null
 
-                // For properties that are for sale
+                // For Listings that are for sale
                 saleType: 'Standard',
                 salePrice: 25000000,
 
-                // For properties that are for lease
+                // For Listings that are for lease
                 leasePrice: 0,
                 leasePriceTerm: 'month',
                 leaseOfficeSizeSf: 0,
@@ -343,10 +343,10 @@ export class Seed {
             }
         ];
     
-        console.log('Seed properties!');
-        const repoProp = getManager().getRepository(Property);
-        await repoProp.save(properties);
-        console.log('Saved properties?');
+        console.log('Seed Listings!');
+        const repoProp = getManager().getRepository(Listing);
+        await repoProp.save(Listings);
+        console.log('Saved Listings?');
     }
 
     async seedColorsets(){
