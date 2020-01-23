@@ -358,15 +358,18 @@ export class Seed {
                 isProtected: true,
                 primaryColor: '#eeeee7',
                 primaryBg: '#0f3193',
+                primaryBgIsNone: false,
                 secondaryColor: '#eeeee7',
                 secondaryBg: '#959595',
+                secondaryBgIsNone: false,
                 infoColor: '#09576e',
                 infoBg: 'white',
                 brandColor: 'blue',
                 brandBg: 'white',
                 navbarColor: 'white',
+                navbarColorActive: '#868181',
                 navbarBg: '#0f3193',
-                navbarColorActive: '#868181'
+                navbarBgIsNone: false
             },
             
             {
@@ -376,15 +379,18 @@ export class Seed {
                 isProtected: false,
                 primaryColor: '#eeeee7',
                 primaryBg: '#0f3193',
+                primaryBgIsNone: false,
                 secondaryColor: '#eeeee7',
                 secondaryBg: '#959595',
+                secondaryBgIsNone: false,
                 infoColor: '#09576e',
                 infoBg: 'white',
                 brandColor: 'blue',
                 brandBg: 'white',
                 navbarColor: 'white',
+                navbarColorActive: '#868181',
                 navbarBg: '#0f3193',
-                navbarColorActive: '#868181'
+                navbarBgIsNone: false
             }
         ];
     

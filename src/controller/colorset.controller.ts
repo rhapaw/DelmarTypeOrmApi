@@ -82,9 +82,12 @@ export class ColorsetController {
         const repo = getManager().getRepository(Colorset);
         const rec: Colorset = req.body;
         rec.isDefault = false;
+        rec.isProtected = false;
         await repo.save(rec);
+        const json: string = JSON.stringify(rec);
+        console.log('created json rec: ' + json);
+        resp.status(201).contentType('application/json').send(json);
         console.log("created Colorset: ", rec);
-        resp.status(201).send();
     }
 
     async updateColorset(req: Request, resp: Response , next: NextFunction) {
