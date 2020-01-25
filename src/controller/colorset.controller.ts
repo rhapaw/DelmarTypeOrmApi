@@ -10,13 +10,13 @@ export class ColorsetController {
     constructor(basePath: string, app: Application, jsonParser: createServer.NextHandleFunction, 
         urlEncodedParser: createServer.NextHandleFunction) {
         // Register routers
-        app.get(basePath + '/colorsetdefault', this.getDefaultColorset);
-        app.put(basePath + '/colorsetdefault/:id', this.setDefaultColorset);
-        app.get(basePath + '/colorset/:id', this.getColorset);
-        app.get(basePath + '/colorset', this.getColorsets);
-        app.post(basePath + '/colorset', jsonParser, this.createColorset);
-        app.put(basePath + '/colorset/:id', jsonParser, this.updateColorset);
-        app.delete(basePath + '/colorset/:id', this.deleteColorset);
+        app.get(basePath + '/colorsetsdefault', this.getDefaultColorset);
+        app.put(basePath + '/colorsetsdefault/:id', this.setDefaultColorset);
+        app.get(basePath + '/colorsets/:id', this.getColorset);
+        app.get(basePath + '/colorsets', this.getColorsets);
+        app.post(basePath + '/colorsets', jsonParser, this.createColorset);
+        app.put(basePath + '/colorsets/:id', jsonParser, this.updateColorset);
+        app.delete(basePath + '/colorsets/:id', this.deleteColorset);
     }
 
     async getDefaultColorset(req: Request, resp: Response , next: NextFunction ) {
@@ -72,7 +72,10 @@ export class ColorsetController {
         const repo = getManager().getRepository(Colorset);
         const skippy = 0;
         const takey = 100;
-        const rec: Colorset[] = await repo.find({skip: skippy, take: takey});
+        const rec: Colorset[] = await (await repo.find({skip: skippy, take: takey}))
+            .sort( (a: Colorset, b: Colorset) => {
+                return a.colorsetName == b.colorsetName? 0 : a.colorsetName < b.colorsetName? -1: 1;
+            }) ;
         const json: string = JSON.stringify(rec);
         resp.status(200).contentType('application/json').send(json);
         console.log('found Colorsets: ', rec);

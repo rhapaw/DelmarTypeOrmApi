@@ -10,11 +10,11 @@ export class ListingController {
     constructor(basePath: string, app: Application, jsonParser: createServer.NextHandleFunction, 
         urlEncodedParser: createServer.NextHandleFunction) {
         // Register routers
-        app.get(basePath + '/Listing/:id', this.getListing);
-        app.get(basePath + '/Listing', this.getListings);
-        app.post(basePath + '/Listing', jsonParser, this.createListing);
-        app.put(basePath + '/Listing/:id', jsonParser, this.updateListing);
-        app.delete(basePath + '/Listing/:id', jsonParser, this.deleteListing);
+        app.get(basePath + '/Listings/:id', this.getListing);
+        app.get(basePath + '/Listings', this.getListings);
+        app.post(basePath + '/Listings', jsonParser, this.createListing);
+        app.put(basePath + '/Listings/:id', jsonParser, this.updateListing);
+        app.delete(basePath + '/Listings/:id', jsonParser, this.deleteListing);
     }
 
     async getListing(req: Request, resp: Response , next: NextFunction ) {

@@ -10,12 +10,12 @@ export class EmployeeController {
     constructor(basePath: string, app: Application, jsonParser: createServer.NextHandleFunction,
         urlEncodedParser: createServer.NextHandleFunction) {
         // Register routers
-        app.get(basePath + '/employee/:id', this.getEmployee);
-        app.get(basePath + '/employee', this.getEmployees);
-        app.post(basePath + '/employee', jsonParser, this.createEmployee);
-        app.put(basePath + '/employee/:id', jsonParser, this.updateEmployee);
-        app.delete(basePath + '/employee/:id', jsonParser, this.deleteEmployee);
-        app.get(basePath + '/contact', this.getContacts);
+        app.get(basePath + '/employees/:id', this.getEmployee);
+        app.get(basePath + '/employees', this.getEmployees);
+        app.post(basePath + '/employees', jsonParser, this.createEmployee);
+        app.put(basePath + '/employees/:id', jsonParser, this.updateEmployee);
+        app.delete(basePath + '/employees/:id', jsonParser, this.deleteEmployee);
+        app.get(basePath + '/contacts', this.getContacts);
     }
 
     async getEmployee(req: Request, resp: Response, next: NextFunction) {
