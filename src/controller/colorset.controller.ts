@@ -28,9 +28,14 @@ export class ColorsetController {
             .where('cs.IsDefault = true')
             .getMany();
 
-        const json: string = JSON.stringify(rec);
-        resp.status(200).contentType('application/json').send(json);
-        console.log('found Colorset: ', rec);
+        if (rec.length >= 1) {
+            const json: string = JSON.stringify(rec);
+            resp.status(200).contentType('application/json').send(json);
+            console.log('Found default Colorset: ', rec);
+        } else {
+            resp.status(404).send();
+            console.log('No default Colorset found');
+        }
     }
 
     async setDefaultColorset(req: Request, resp: Response , next: NextFunction ) {
@@ -63,19 +68,22 @@ export class ColorsetController {
             .where('id = :id)', {id: id})
             .getMany();
 
-        const json: string = JSON.stringify(rec);
-        resp.status(200).contentType('application/json').send(json);
-        console.log('found Colorsets: ', rec);
+        if (rec.length >= 1) {
+            const json: string = JSON.stringify(rec);
+            resp.status(200).contentType('application/json').send(json);
+            console.log('Found Colorset: ', rec);
+        }
+
     }
 
     async getColorsets(req: Request, resp: Response , next: NextFunction) {
         const repo = getManager().getRepository(Colorset);
         const skippy = 0;
         const takey = 100;
-        const rec: Colorset[] = await (await repo.find({skip: skippy, take: takey}))
-            .sort( (a: Colorset, b: Colorset) => {
+        const rec: Colorset[] = await repo.find({order: {colorsetName: 'ASC'}, skip: skippy, take: takey});
+/*             .sort( (a: Colorset, b: Colorset) => {
                 return a.colorsetName == b.colorsetName? 0 : a.colorsetName < b.colorsetName? -1: 1;
-            }) ;
+            }) ; */
         const json: string = JSON.stringify(rec);
         resp.status(200).contentType('application/json').send(json);
         console.log('found Colorsets: ', rec);
@@ -98,7 +106,6 @@ export class ColorsetController {
         const id: any = parseInt(req.params.id);
         console.log('update colorset id: ', id);
         const rec: Colorset = req.body;
-        rec.isDefault = false;
         await repo.update(id, rec);
         resp.status(200).send();
         console.log('updated Colorset: ', id);
